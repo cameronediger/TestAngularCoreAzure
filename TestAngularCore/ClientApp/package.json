@@ -6,9 +6,11 @@
     "start": "ng serve",
     "build": "ng build",
     "build:ssr": "ng run TestAngularCore:server:dev",
+    "build:prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "clean": "rimraf ./dist"
   },
   "private": true,
   "dependencies": {
