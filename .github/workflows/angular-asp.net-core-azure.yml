@@ -37,7 +37,7 @@ jobs:
       - name: npm install and npm run build
         run: |
           npm intall --prefix ./TestAngularCore/ClientApp
-	  npm run build:prod --prefix ./TestAngularCore/ClientApp
+          npm run build:prod --prefix ./TestAngularCore/ClientApp
 
       # Run dotnet build and publish
       - name: dotnet build and publish
