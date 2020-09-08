@@ -36,7 +36,6 @@ jobs:
       # Run npm install and npm build
       - name: npm install and npm run build
         run: |
-          npm run clean --prefix ./TestAngularCore/ClientApp
           npm install --prefix ./TestAngularCore/ClientApp
           npm run build:prod --prefix ./TestAngularCore/ClientApp
 
