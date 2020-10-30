@@ -14,6 +14,7 @@ export class AppConfigService {
 
     serverSettings = await this.commonService.getSettings().toPromise();
     this.commonService.environment = serverSettings['environment'];
+    this.commonService.location = serverSettings['location'];
 
     return Promise.resolve();
   }

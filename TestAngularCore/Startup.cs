@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IO;
+using TestAngularCore.Models;
 
 namespace TestAngularCore
 {
@@ -22,6 +23,11 @@ namespace TestAngularCore
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
+
+			//configure strongly typed settings objects
+			var appSettingsSection = Configuration.GetSection("AppSettings");
+			services.Configure<AppSettings>(appSettingsSection);
+
 			// In production, the Angular files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{

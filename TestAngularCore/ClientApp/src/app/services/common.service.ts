@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class CommonService {
   appRootUrl = '';
   environment = 'Development';
+  location: string;
 
   constructor(private http: HttpClient) { }
 
