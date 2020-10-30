@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
+import { CommonService } from './services/common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppConfigService {
-  constructor() { }
+  constructor(private commonService: CommonService) { }
 
   async loadServerSettings() {
     var serverSettings: { [key: string]: string };
 
-    //serverSettings = await getsettings();
+    this.commonService.appRootUrl = document.location.pathname;
 
-    //return Promise.resolve();
+    serverSettings = await this.commonService.getSettings().toPromise();
+    this.commonService.environment = serverSettings['environment'];
+
+    return Promise.resolve();
   }
 }

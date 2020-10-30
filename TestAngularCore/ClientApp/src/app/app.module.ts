@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
 import { AppConfigService } from 'src/app/app.config.service';
+import { EnvironmentHeaderComponent } from './nav-menu/environment-header/environment-header.component';
 
 export function initConfiguration(configService: AppConfigService): Function {
   return () => configService.loadServerSettings();
@@ -22,7 +23,8 @@ export function initConfiguration(configService: AppConfigService): Function {
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    EnvironmentHeaderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
