@@ -4,6 +4,7 @@
   >
     <div class="container">
       <a class="navbar-brand" [routerLink]="['/']">TestAngularCore</a>
+      
       <button
         class="navbar-toggler"
         type="button"
@@ -20,6 +21,9 @@
         [ngClass]="{ show: isExpanded }"
       >
         <ul class="navbar-nav flex-grow">
+          <li class="nav-item">
+            <app-environment-header></app-environment-header>
+          </li>
           <li
             class="nav-item"
             [routerLinkActive]="['link-active']"
