@@ -1,0 +1,37 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - TEST
+      - PROD
+
+env:
+  DOTNET_VERSION: '3.1.401'           # set this to the dot net version to use
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      # Checkout the repo
+      - uses: actions/checkout@v2
+      
+      # Setup .NET Core SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }} 
+      
+      # Run npm install and npm build
+      - name: npm install and npm run build
+        run: |
+          npm install --prefix ./TestAngularCore/ClientApp
+          npm run build:prod --prefix ./TestAngularCore/ClientApp
+
+      # Run dotnet build and unit tests
+      - name: dotnet build and publish
+        run: |
+          dotnet build . --configuration PROD
+          dotnet test .
