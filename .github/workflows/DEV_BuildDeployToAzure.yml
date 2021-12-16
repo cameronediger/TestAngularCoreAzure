@@ -50,7 +50,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with: 
           app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_TEST  }} # Define secret variable in repository settings as per action documentation
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_MAINDEV  }} # Define secret variable in repository settings as per action documentation
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
           slot-name: maindev
 
