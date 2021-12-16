@@ -5,6 +5,8 @@ on:
     branches:
       - TEST
   pull_request:
+    types:
+      - closed
     branches:
       - TEST
 # CONFIGURATION
