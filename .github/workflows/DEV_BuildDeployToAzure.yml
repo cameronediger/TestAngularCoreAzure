@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - DEV/**
-  pull_request:
-    branches:
-      - DEV/**
+
 # CONFIGURATION
 # For help, go to https://github.com/Azure/Actions
 #
@@ -17,7 +15,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: cecoretestangular    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '3.1.401'           # set this to the dot net version to use
+  DOTNET_VERSION: '3.1.x'           # set this to the dot net version to use
 
 jobs:
   build-and-deploy:
@@ -42,8 +40,9 @@ jobs:
       # Run dotnet build and publish
       - name: dotnet build and publish
         run: |
+          echo running on branch ${GITHUB_REF##*/}
           dotnet build . --configuration DEV
-          dotnet publish . -c DEV -o myapp
+          dotnet publish . -c DEV -o publish_output
 
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
@@ -51,7 +50,7 @@ jobs:
         with: 
           app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_MAINDEV  }} # Define secret variable in repository settings as per action documentation
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/publish_output'
           slot-name: maindev
 
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples

@@ -8,10 +8,10 @@ on:
       - PROD
 
 env:
-  DOTNET_VERSION: '3.1.401'           # set this to the dot net version to use
+  DOTNET_VERSION: '3.1.x'           # set this to the dot net version to use
 
 jobs:
-  build-and-deploy:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
 
@@ -33,5 +33,6 @@ jobs:
       # Run dotnet build and unit tests
       - name: dotnet build and publish
         run: |
+          echo running on branch ${GITHUB_REF##*/}
           dotnet build . --configuration PROD
           dotnet test .
