@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
+using TestAngularCore.Models;
 
 namespace TestAngularCore
 {
@@ -21,6 +23,11 @@ namespace TestAngularCore
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
+
+			//configure strongly typed settings objects
+			var appSettingsSection = Configuration.GetSection("AppSettings");
+			services.Configure<AppSettings>(appSettingsSection);
+
 			// In production, the Angular files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
@@ -31,9 +38,20 @@ namespace TestAngularCore
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			string envName = string.IsNullOrWhiteSpace(env.EnvironmentName) ? "." : $".{env.EnvironmentName}.";
+			string siteSecurityConfigPath = Path.Combine("Config", $"siteSecurity{envName}config");
+			string siteConfigPath = Path.Combine("Config", $"site{envName}config");
+			string appSettingsConfigPath = $"appsettings.json";
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
+			}
+			else if(env.IsProduction() || env.IsStaging())
+			{
+				app.UseExceptionHandler("/Error");
+				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+				app.UseHsts();
 			}
 			else
 			{
