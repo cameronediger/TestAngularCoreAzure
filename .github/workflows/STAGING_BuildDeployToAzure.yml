@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - PROD
-  pull_request:
-    types:
-      - closed
-    branches:
-      - PROD
+#  pull_request:
+#    types:
+#      - closed
+#    branches:
+#      - PROD
 # CONFIGURATION
 # For help, go to https://github.com/Azure/Actions
 #
