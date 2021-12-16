@@ -43,8 +43,8 @@ jobs:
       - name: dotnet build and publish
         run: |
           dotnet build . --configuration DEV
-          dotnet publish . -c DEV -o myapp 
-          
+          dotnet publish . -c DEV -o myapp
+
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
