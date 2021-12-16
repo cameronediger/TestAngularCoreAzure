@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - TEST
-  pull_request:
-    types:
-      - closed
-    branches:
-      - TEST
+#  pull_request:
+#    types:
+#      - closed
+#    branches:
+#      - TEST
 # CONFIGURATION
 # For help, go to https://github.com/Azure/Actions
 #
