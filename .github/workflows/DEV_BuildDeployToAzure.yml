@@ -36,12 +36,14 @@ jobs:
         run: |
           npm install --prefix ./TestAngularCore/ClientApp
           npm run build:prod --prefix ./TestAngularCore/ClientApp
+          npm run test:prod --prefix ./TestAngularCore/ClientApp
 
       # Run dotnet build and publish
       - name: dotnet build and publish
         run: |
           echo running on branch ${GITHUB_REF##*/}
           dotnet build . --configuration DEV
+          dotnet test .
           dotnet publish . -c DEV -o publish_output
 
       # Deploy to Azure Web apps
